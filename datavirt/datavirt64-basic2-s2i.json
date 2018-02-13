@@ -38,6 +38,13 @@
             "value": "",
             "required": false
         },
+	        {
+            "description": "Specify a custom hostname for the JDBC route.  Leave blank to use default hostname, e.g.: secure-<service-name>-<project>.<default-domain-suffix>",
+            "displayName": "Custom JDBC Route Hostname",
+            "name": "HOSTNAME_JDBC",
+            "value": "",
+            "required": false
+        },
         {
             "description": "The URL of the repository with your application source code.",
             "displayName": "Git Repository URL",
