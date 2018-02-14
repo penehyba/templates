@@ -156,7 +156,7 @@
             "spec": {
                 "ports": [
                     {
-                    	"protocol":"TCP",
+                    	"protocol": "TCP",
 			"name": "jdbc",
                         "port": 31000,
                         "targetPort": "31000"
@@ -164,10 +164,10 @@
                 ],
                 "selector": {
                     "deploymentConfig": "${APPLICATION_NAME}"
-		    "name":"basic-jdbc"
+		    "name": "basic-jdbc"
                 },
-		"type":"NodePort",
-		"sessionAffinity":"None"
+		"type": "NodePort",
+		"sessionAffinity": "None"
             },
             "metadata": {
                 "name": "${APPLICATION_NAME}",
