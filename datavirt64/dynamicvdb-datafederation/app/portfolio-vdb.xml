@@ -68,24 +68,24 @@ CREATE FOREIGN TABLE Sheet1 (
     <model name="Stocks" type="VIRTUAL">
         <metadata type="DDL"><![CDATA[
                 
-        CREATE VIEW StockPrices (
+        CREATE VIEW StockPrices (id integer PRIMARY KEY,
             symbol string,
             price bigdecimal
             )
             AS  
-               SELECT SP.symbol, SP.price
+               SELECT ROW_NUMBER() OVER (ORDER BY b.ACCOUNT_ID) as id, SP.symbol, SP.price
                 FROM (EXEC MarketData.getTextFiles('*.txt')) AS f, 
                     TEXTTABLE(f.file COLUMNS symbol string, price bigdecimal HEADER) AS SP;
         
         
-        CREATE VIEW Stock (
+        CREATE VIEW Stock (id integer PRIMARY KEY,
             product_id integer,
             symbol string,
             price bigdecimal,
             company_name   varchar(256)
             )
             AS
-                SELECT  A.ID, S.symbol, S.price, A.COMPANY_NAME
+                SELECT ROW_NUMBER() OVER (ORDER BY b.ACCOUNT_ID) as id, A.ID, S.symbol, S.price, A.COMPANY_NAME
                     FROM StockPrices AS S, Accounts.PRODUCT AS A
                     WHERE S.symbol = A.SYMBOL;
 
