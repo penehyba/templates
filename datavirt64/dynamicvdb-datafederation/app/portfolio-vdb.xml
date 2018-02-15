@@ -73,7 +73,7 @@ CREATE FOREIGN TABLE Sheet1 (
             price bigdecimal
             )
             AS  
-               SELECT ROW_NUMBER() OVER (ORDER BY b.ACCOUNT_ID) as id, SP.symbol, SP.price
+               SELECT ROW_NUMBER() OVER (ORDER BY SP.symbol) as id, SP.symbol, SP.price
                 FROM (EXEC MarketData.getTextFiles('*.txt')) AS f, 
                     TEXTTABLE(f.file COLUMNS symbol string, price bigdecimal HEADER) AS SP;
         
@@ -85,7 +85,7 @@ CREATE FOREIGN TABLE Sheet1 (
             company_name   varchar(256)
             )
             AS
-                SELECT ROW_NUMBER() OVER (ORDER BY b.ACCOUNT_ID) as id, A.ID, S.symbol, S.price, A.COMPANY_NAME
+                SELECT ROW_NUMBER() OVER (ORDER BY A.ID) as id, A.ID, S.symbol, S.price, A.COMPANY_NAME
                     FROM StockPrices AS S, Accounts.PRODUCT AS A
                     WHERE S.symbol = A.SYMBOL;
 
